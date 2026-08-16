@@ -325,16 +325,16 @@ If no suitable interaction exists, omit this scenario.
 
 # Scenario Matrix
 
-| Scenario | Basic Selenium | Custom Selenium | Selenide |
-|---|---:|---:|---:|
-| UI smoke | Yes | Yes | Yes |
-| Minimal booking | Yes | Yes | Yes |
-| Complete booking | Yes | Yes | Yes |
-| Validation | Yes | Yes | Yes |
-| Lifecycle | Yes | Yes | Yes |
-| Retrieval | Yes, if supported | Yes, if supported | Yes, if supported |
-| Persistence | Yes | Yes | Yes |
-| Synchronization | Yes | Yes | Yes |
+| Scenario         |    Basic Selenium |   Custom Selenium |          Selenide |
+|------------------|------------------:|------------------:|------------------:|
+| UI smoke         |               Yes |               Yes |               Yes |
+| Minimal booking  |               Yes |               Yes |               Yes |
+| Complete booking |               Yes |               Yes |               Yes |
+| Validation       |               Yes |               Yes |               Yes |
+| Lifecycle        |               Yes |               Yes |               Yes |
+| Retrieval        | Yes, if supported | Yes, if supported | Yes, if supported |
+| Persistence      |               Yes |               Yes |               Yes |
+| Synchronization  |               Yes |               Yes |               Yes |
 
 ---
 
