@@ -5,6 +5,7 @@ import com.vgekhtman.automation.common.api.BookingApiClient;
 import com.vgekhtman.automation.common.model.BookingData;
 import com.vgekhtman.automation.common.testdata.BookingDataFactory;
 import com.vgekhtman.automation.selenide.pages.RoomReservationPage;
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SelenideExtension.class)
+@Feature("Booking")
 class CreateBookingTest {
 
     @Test

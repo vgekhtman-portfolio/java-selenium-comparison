@@ -5,6 +5,8 @@ import com.vgekhtman.automation.common.model.BookingData;
 import com.vgekhtman.automation.common.testdata.BookingDataFactory;
 import com.vgekhtman.automation.seleniumbasic.pages.RoomReservationPage;
 import com.vgekhtman.automation.seleniumbasic.support.BaseUiTest;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Feature("Booking")
 class CreateBookingTest extends BaseUiTest {
 
     @Test
@@ -19,14 +22,18 @@ class CreateBookingTest extends BaseUiTest {
     void createsBookingWithMinimalValidData() {
         BookingData booking = BookingDataFactory.minimalValidBooking();
 
-        RoomReservationPage reservationPage = new RoomReservationPage(driver)
-                .open(booking.getRoomType(), booking.getCheckIn(), booking.getCheckOut())
-                .startReservation()
-                .fillGuestDetails(booking);
-        reservationPage.confirmReservation();
+        RoomReservationPage reservationPage = Allure.step("Open booking page and fill guest details", () ->
+                new RoomReservationPage(driver)
+                        .open(booking.getRoomType(), booking.getCheckIn(), booking.getCheckOut())
+                        .startReservation()
+                        .fillGuestDetails(booking));
 
-        assertTrue(reservationPage.waitForBookingConfirmed(), "Booking should be confirmed");
-        assertConfirmationShowsDates(reservationPage, booking);
+        Allure.step("Submit the booking", reservationPage::confirmReservation);
+
+        Allure.step("Verify booking confirmation", () -> {
+            assertTrue(reservationPage.waitForBookingConfirmed(), "Booking should be confirmed");
+            assertConfirmationShowsDates(reservationPage, booking);
+        });
         BookingApiClient.deleteBooking(booking);
     }
 
@@ -35,14 +42,18 @@ class CreateBookingTest extends BaseUiTest {
     void createsBookingWithCompleteData() {
         BookingData booking = BookingDataFactory.completeValidBooking();
 
-        RoomReservationPage reservationPage = new RoomReservationPage(driver)
-                .open(booking.getRoomType(), booking.getCheckIn(), booking.getCheckOut())
-                .startReservation()
-                .fillGuestDetails(booking);
-        reservationPage.confirmReservation();
+        RoomReservationPage reservationPage = Allure.step("Open booking page and fill guest details", () ->
+                new RoomReservationPage(driver)
+                        .open(booking.getRoomType(), booking.getCheckIn(), booking.getCheckOut())
+                        .startReservation()
+                        .fillGuestDetails(booking));
 
-        assertTrue(reservationPage.waitForBookingConfirmed(), "Booking should be confirmed");
-        assertConfirmationShowsDates(reservationPage, booking);
+        Allure.step("Submit the booking", reservationPage::confirmReservation);
+
+        Allure.step("Verify booking confirmation", () -> {
+            assertTrue(reservationPage.waitForBookingConfirmed(), "Booking should be confirmed");
+            assertConfirmationShowsDates(reservationPage, booking);
+        });
         BookingApiClient.deleteBooking(booking);
     }
 

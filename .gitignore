@@ -34,6 +34,8 @@ target/
 # Allure results/reports
 allure-results/
 allure-report/
+# allure-maven plugin's own runtime/tool cache (downloaded commandline + Node runtime)
+.allure/
 
 # Agent working docs - not part of the versioned repository
 .docs-agent/

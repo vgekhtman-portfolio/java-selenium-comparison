@@ -1,6 +1,7 @@
 package com.vgekhtman.automation.seleniumbasic.support;
 
 import com.vgekhtman.automation.seleniumbasic.driver.DriverFactory;
+import io.qameta.allure.Allure;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
@@ -11,6 +12,7 @@ public abstract class BaseUiTest {
 
     @BeforeEach
     void setUpDriver() {
+        Allure.label("epic", "Basic Selenium");
         driver = DriverFactory.createDriver();
     }
 

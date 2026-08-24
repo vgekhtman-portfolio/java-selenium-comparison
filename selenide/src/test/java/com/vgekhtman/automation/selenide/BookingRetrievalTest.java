@@ -7,6 +7,7 @@ import com.vgekhtman.automation.common.testdata.BookingDataFactory;
 import com.vgekhtman.automation.selenide.pages.components.AdminBookingRow;
 import com.vgekhtman.automation.selenide.pages.RoomReservationPage;
 import com.vgekhtman.automation.selenide.pages.admin.AdminLoginPage;
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 // TC-BOOK-005: Booking Retrieval, via the Admin panel - see the "Retrieval
 // Mechanism" note in docs/test-scenarios.md for why.
 @ExtendWith(SelenideExtension.class)
+@Feature("Booking")
 class BookingRetrievalTest {
 
     @Test

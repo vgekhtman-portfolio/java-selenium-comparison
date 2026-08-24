@@ -2,6 +2,7 @@ package com.vgekhtman.automation.selenide;
 
 import com.vgekhtman.automation.selenide.support.SelenideExtension;
 import com.vgekhtman.automation.selenide.pages.HomePage;
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 // TC-UI-001: Application Smoke & Readiness
 @ExtendWith(SelenideExtension.class)
+@Feature("Smoke")
 class ApplicationSmokeTest {
 
     @Test

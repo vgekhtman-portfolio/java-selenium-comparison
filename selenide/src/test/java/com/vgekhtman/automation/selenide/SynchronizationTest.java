@@ -5,6 +5,7 @@ import com.vgekhtman.automation.common.api.BookingApiClient;
 import com.vgekhtman.automation.common.model.BookingData;
 import com.vgekhtman.automation.common.testdata.BookingDataFactory;
 import com.vgekhtman.automation.selenide.pages.RoomReservationPage;
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * state before acting or asserting. None of it is a fixed sleep.
  */
 @ExtendWith(SelenideExtension.class)
+@Feature("Synchronization")
 class SynchronizationTest {
 
     @Test

@@ -197,6 +197,18 @@ Reports should provide:
 * failure information
 * screenshots where appropriate
 
+Each module writes its results into one shared directory (`target/allure-results`)
+at the project root, so a single run of any or all modules produces one combined
+report. Generate and view it locally:
+
+```bash
+mvn clean test
+mvn -N io.qameta.allure:allure-maven:serve -Dreport.version=2.34.1
+```
+
+`serve` opens the report in a browser and keeps a local server running until you
+stop it with `Ctrl+C` in that terminal.
+
 # CI
 
 GitHub Actions is used for automated test execution.

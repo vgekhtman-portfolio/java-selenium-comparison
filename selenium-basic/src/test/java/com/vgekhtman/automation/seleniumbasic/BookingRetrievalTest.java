@@ -7,6 +7,8 @@ import com.vgekhtman.automation.seleniumbasic.pages.RoomReservationPage;
 import com.vgekhtman.automation.seleniumbasic.pages.admin.AdminBookingsPage;
 import com.vgekhtman.automation.seleniumbasic.pages.admin.AdminLoginPage;
 import com.vgekhtman.automation.seleniumbasic.support.BaseUiTest;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 // TC-BOOK-005: Booking Retrieval, via the Admin panel - see the "Retrieval
 // Mechanism" note in docs/test-scenarios.md for why.
+@Feature("Booking")
 class BookingRetrievalTest extends BaseUiTest {
 
     @Test
@@ -25,19 +28,21 @@ class BookingRetrievalTest extends BaseUiTest {
     void retrievesExistingBooking() {
         BookingData booking = BookingDataFactory.uniqueValidBooking();
 
-        RoomReservationPage reservationPage = new RoomReservationPage(driver)
-                .open(booking.getRoomType(), booking.getCheckIn(), booking.getCheckOut())
-                .startReservation()
-                .fillGuestDetails(booking);
+        RoomReservationPage reservationPage = Allure.step("Create a booking through the UI", () ->
+                new RoomReservationPage(driver)
+                        .open(booking.getRoomType(), booking.getCheckIn(), booking.getCheckOut())
+                        .startReservation()
+                        .fillGuestDetails(booking));
         reservationPage.confirmReservation();
         assertTrue(reservationPage.waitForBookingConfirmed(), "Booking should be confirmed");
 
-        AdminBookingsPage adminBookings = new AdminLoginPage(driver)
-                .open()
-                .loginAsAdmin()
-                .openRoomBookings(booking.getRoomType());
-
+        AdminBookingsPage adminBookings = Allure.step("Retrieve the booking via the Admin panel", () ->
+                new AdminLoginPage(driver)
+                        .open()
+                        .loginAsAdmin()
+                        .openRoomBookings(booking.getRoomType()));
         adminBookings.waitForBookingVisible(booking.getFirstName());
+
         assertEquals(booking.getLastName(), adminBookings.lastName(booking.getFirstName()));
         BookingApiClient.deleteBooking(booking);
     }
@@ -48,10 +53,11 @@ class BookingRetrievalTest extends BaseUiTest {
         BookingData booking = BookingDataFactory.minimalValidBooking();
         String neverBookedFirstName = "Nobody" + UUID.randomUUID().toString().substring(0, 8);
 
-        AdminBookingsPage adminBookings = new AdminLoginPage(driver)
-                .open()
-                .loginAsAdmin()
-                .openRoomBookings(booking.getRoomType());
+        AdminBookingsPage adminBookings = Allure.step("Search the Admin panel for a booking that was never created", () ->
+                new AdminLoginPage(driver)
+                        .open()
+                        .loginAsAdmin()
+                        .openRoomBookings(booking.getRoomType()));
 
         assertFalse(adminBookings.hasBookingFor(neverBookedFirstName));
     }
