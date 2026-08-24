@@ -63,7 +63,10 @@ Verify the primary booking flow with valid mandatory information.
 
 ## Test Data
 
-Use a reusable valid booking-data object.
+Use a reusable valid booking-data object with the shortest realistic values
+that still satisfy field validation (short name near the minimum length,
+single-night stay, cheapest room). See note under TC-BOOK-002 for why
+"minimal" is defined this way on this SUT.
 
 ## Steps
 
@@ -97,10 +100,22 @@ Use a reusable valid booking-data object.
 
 Verify all relevant booking fields supported by the SUT.
 
+## Note on "Complete" vs. "Minimal"
+
+The live booking form (automationintesting.online) has no optional fields -
+firstname, lastname, email and phone are all mandatory on every booking, and
+there is no extra field (e.g. special requests) that only appears in a
+"complete" flow. So TC-BOOK-001 and TC-BOOK-002 use the same field set;
+"complete" here means exercising the field constraints more thoroughly
+(near-upper-bound length values, a hyphenated name, a multi-night stay, a
+different room) rather than a larger set of populated fields.
+
 ## Steps
 
 1. Open the booking interface.
-2. Populate all applicable fields with valid data.
+2. Populate all fields with valid data that exercises the field constraints
+   more thoroughly than the minimal-data scenario (longer values, multi-night
+   stay, different room).
 3. Submit the booking.
 4. Wait for the resulting state.
 5. Verify successful creation.

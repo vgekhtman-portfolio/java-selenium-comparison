@@ -21,5 +21,10 @@
 
     <dependencies>
         <!-- Intentionally no Selenium/Selenide dependencies here. -->
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
     </dependencies>
 </project>
