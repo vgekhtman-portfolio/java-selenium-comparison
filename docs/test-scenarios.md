@@ -220,6 +220,15 @@ API setup/cleanup may be used when necessary for deterministic execution.
 
 Verify retrieval of existing booking data through UI functionality actually exposed by the SUT.
 
+## Retrieval Mechanism
+
+The customer-facing UI has no booking search/lookup - the booking
+confirmation screen only echoes back the stay dates, and there is no "my
+bookings" view. The Admin panel's per-room booking list is the only
+UI-exposed retrieval mechanism on this SUT, so implementations exercise
+retrieval through it (admin login, then the target room's booking list)
+rather than inventing customer-facing retrieval.
+
 ## Steps
 
 1. Prepare or create a known booking.
@@ -315,6 +324,18 @@ Use synchronization only where required by actual SUT behavior.
 
 # TC-SYNC-002 — Synchronization: Conditional Interaction
 
+## Status: Omitted
+
+Investigated during Phase 3 and omitted. The only date-range control on the
+SUT (the room reservation calendar, and the homepage availability search
+that opens the same widget) requires a mousedown-drag-mouseup gesture to
+select a range - plain clicks on day cells do not register a new
+selection. Every other conditional/dynamic UI behavior on the SUT is
+already covered by TC-SYNC-001 (post-submission state) and TC-BOOK-003
+(validation feedback). Simulating the drag gesture would be exactly the
+kind of manufactured complexity this scenario's own "Important" note
+below warns against, so it is omitted per that note rather than forced.
+
 ## Intent
 
 Demonstrate synchronization around a UI element whose state changes during the actual SUT flow.
@@ -350,6 +371,7 @@ If no suitable interaction exists, omit this scenario.
 | Retrieval        | Yes, if supported | Yes, if supported | Yes, if supported |
 | Persistence      |               Yes |               Yes |               Yes |
 | Synchronization  |               Yes |               Yes |               Yes |
+| Conditional sync |            Omitted |            Omitted |            Omitted |
 
 ---
 
