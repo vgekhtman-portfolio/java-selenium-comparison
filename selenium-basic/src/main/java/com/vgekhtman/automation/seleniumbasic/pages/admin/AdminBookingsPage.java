@@ -83,6 +83,7 @@ public class AdminBookingsPage {
     }
 
     private By bookingRow(String firstName) {
-        return By.xpath("//div[contains(@class,'detail')][.//p[normalize-space()='" + firstName + "']]");
+        return By.xpath("//div[contains(@class,'detail')]"
+                + "[.//p[normalize-space()='" + firstName + "'] or .//input[@name='firstname'][@value='" + firstName + "']]");
     }
 }
