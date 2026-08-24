@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.vgekhtman.automation</groupId>
+        <artifactId>java-selenium-comparison</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>selenide</artifactId>
+    <packaging>jar</packaging>
+
+    <name>selenide</name>
+    <description>
+        UI automation implementation using Selenide's native element, condition and
+        synchronization capabilities.
+    </description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.vgekhtman.automation</groupId>
+            <artifactId>common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+        </dependency>
+    </dependencies>
+</project>
