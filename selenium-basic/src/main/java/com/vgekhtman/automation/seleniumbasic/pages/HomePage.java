@@ -1,5 +1,6 @@
 package com.vgekhtman.automation.seleniumbasic.pages;
 
+import com.vgekhtman.automation.common.config.Config;
 import com.vgekhtman.automation.seleniumbasic.config.TestConfig;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -21,7 +22,7 @@ public class HomePage {
     }
 
     public HomePage open() {
-        driver.get(TestConfig.baseUrl());
+        driver.get(Config.baseUrl());
         wait.until(ExpectedConditions.visibilityOfElementLocated(roomsHeading));
         return this;
     }

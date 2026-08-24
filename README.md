@@ -48,11 +48,8 @@ https://automationintesting.online/
 
 Supporting API:
 
-https://restful-booker.herokuapp.com/
-
-API documentation:
-
-https://restful-booker.herokuapp.com/apidoc/index.html
+The SUT's own REST API, at the same origin as the UI
+(https://automationintesting.online/api/...).
 
 The API is used only where it provides useful deterministic test-data setup, cleanup, or supporting verification.
 

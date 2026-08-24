@@ -3,7 +3,7 @@ package com.vgekhtman.automation.selenide;
 import com.vgekhtman.automation.selenide.support.SelenideExtension;
 import com.vgekhtman.automation.common.model.BookingData;
 import com.vgekhtman.automation.common.testdata.BookingDataFactory;
-import com.vgekhtman.automation.selenide.components.AdminBookingRow;
+import com.vgekhtman.automation.selenide.pages.components.AdminBookingRow;
 import com.vgekhtman.automation.selenide.pages.RoomReservationPage;
 import com.vgekhtman.automation.selenide.pages.admin.AdminLoginPage;
 import org.junit.jupiter.api.DisplayName;

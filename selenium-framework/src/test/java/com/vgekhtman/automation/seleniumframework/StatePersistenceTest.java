@@ -1,8 +1,9 @@
 package com.vgekhtman.automation.seleniumframework;
 
+import com.vgekhtman.automation.common.api.BookingApiClient;
 import com.vgekhtman.automation.common.model.BookingData;
 import com.vgekhtman.automation.common.testdata.BookingDataFactory;
-import com.vgekhtman.automation.seleniumframework.components.AdminBookingRow;
+import com.vgekhtman.automation.seleniumframework.pages.components.AdminBookingRow;
 import com.vgekhtman.automation.seleniumframework.pages.RoomReservationPage;
 import com.vgekhtman.automation.seleniumframework.pages.admin.AdminBookingsPage;
 import com.vgekhtman.automation.seleniumframework.pages.admin.AdminLoginPage;
@@ -49,5 +50,6 @@ class StatePersistenceTest {
                 "Check-in date should be unchanged after revisiting");
         assertEquals(DateTimeFormatter.ISO_LOCAL_DATE.format(booking.getCheckOut()), revisitRow.checkOutDate(),
                 "Check-out date should be unchanged after revisiting");
+        BookingApiClient.deleteBooking(booking);
     }
 }

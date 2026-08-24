@@ -3,7 +3,7 @@ package com.vgekhtman.automation.selenide.pages.admin;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import com.vgekhtman.automation.selenide.config.SelenideConfig;
+import com.vgekhtman.automation.common.config.Config;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -23,8 +23,8 @@ public class AdminLoginPage {
     }
 
     public AdminBookingsPage loginAsAdmin() {
-        usernameInput.setValue(SelenideConfig.adminUsername());
-        passwordInput.setValue(SelenideConfig.adminPassword());
+        usernameInput.setValue(Config.adminUsername());
+        passwordInput.setValue(Config.adminPassword());
         loginButton.click();
         roomsNavLink.shouldBe(Condition.visible);
         return new AdminBookingsPage();

@@ -2,7 +2,7 @@ package com.vgekhtman.automation.selenide.pages.admin;
 
 import com.codeborne.selenide.Condition;
 import com.vgekhtman.automation.common.model.RoomType;
-import com.vgekhtman.automation.selenide.components.AdminBookingRow;
+import com.vgekhtman.automation.selenide.pages.components.AdminBookingRow;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;

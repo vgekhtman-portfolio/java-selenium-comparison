@@ -5,7 +5,7 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.vgekhtman.automation.common.model.BookingData;
 import com.vgekhtman.automation.common.model.RoomType;
-import com.vgekhtman.automation.selenide.components.BookingForm;
+import com.vgekhtman.automation.selenide.pages.components.BookingForm;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

@@ -1,9 +1,9 @@
 package com.vgekhtman.automation.seleniumframework.pages;
 
+import com.vgekhtman.automation.common.config.Config;
 import com.vgekhtman.automation.common.model.BookingData;
 import com.vgekhtman.automation.common.model.RoomType;
-import com.vgekhtman.automation.seleniumframework.components.BookingForm;
-import com.vgekhtman.automation.seleniumframework.config.FrameworkConfig;
+import com.vgekhtman.automation.seleniumframework.pages.components.BookingForm;
 import com.vgekhtman.automation.seleniumframework.core.UiElement;
 import com.vgekhtman.automation.seleniumframework.driver.DriverManager;
 import org.openqa.selenium.By;
@@ -26,7 +26,7 @@ public class RoomReservationPage {
 
     public RoomReservationPage open(RoomType roomType, LocalDate checkIn, LocalDate checkOut) {
         String url = "%s/reservation/%d?checkin=%s&checkout=%s".formatted(
-                FrameworkConfig.baseUrl(),
+                Config.baseUrl(),
                 roomType.getRoomId(),
                 DateTimeFormatter.ISO_LOCAL_DATE.format(checkIn),
                 DateTimeFormatter.ISO_LOCAL_DATE.format(checkOut));

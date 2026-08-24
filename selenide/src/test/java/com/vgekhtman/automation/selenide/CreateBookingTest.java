@@ -1,6 +1,7 @@
 package com.vgekhtman.automation.selenide;
 
 import com.vgekhtman.automation.selenide.support.SelenideExtension;
+import com.vgekhtman.automation.common.api.BookingApiClient;
 import com.vgekhtman.automation.common.model.BookingData;
 import com.vgekhtman.automation.common.testdata.BookingDataFactory;
 import com.vgekhtman.automation.selenide.pages.RoomReservationPage;
@@ -28,6 +29,7 @@ class CreateBookingTest {
 
         assertTrue(reservationPage.waitForBookingConfirmed(), "Booking should be confirmed");
         assertConfirmationShowsDates(reservationPage, booking);
+        BookingApiClient.deleteBooking(booking);
     }
 
     @Test
@@ -43,6 +45,7 @@ class CreateBookingTest {
 
         assertTrue(reservationPage.waitForBookingConfirmed(), "Booking should be confirmed");
         assertConfirmationShowsDates(reservationPage, booking);
+        BookingApiClient.deleteBooking(booking);
     }
 
     private void assertConfirmationShowsDates(RoomReservationPage reservationPage, BookingData booking) {

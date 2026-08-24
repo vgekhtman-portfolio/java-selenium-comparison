@@ -1,5 +1,6 @@
 package com.vgekhtman.automation.seleniumbasic.pages.admin;
 
+import com.vgekhtman.automation.common.config.Config;
 import com.vgekhtman.automation.seleniumbasic.config.TestConfig;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -21,14 +22,14 @@ public class AdminLoginPage {
     }
 
     public AdminLoginPage open() {
-        driver.get(TestConfig.baseUrl() + "/admin");
+        driver.get(Config.baseUrl() + "/admin");
         wait.until(ExpectedConditions.visibilityOfElementLocated(usernameInput));
         return this;
     }
 
     public AdminBookingsPage loginAsAdmin() {
-        driver.findElement(usernameInput).sendKeys(TestConfig.adminUsername());
-        driver.findElement(passwordInput).sendKeys(TestConfig.adminPassword());
+        driver.findElement(usernameInput).sendKeys(Config.adminUsername());
+        driver.findElement(passwordInput).sendKeys(Config.adminPassword());
         driver.findElement(loginButton).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Rooms")));
         return new AdminBookingsPage(driver);

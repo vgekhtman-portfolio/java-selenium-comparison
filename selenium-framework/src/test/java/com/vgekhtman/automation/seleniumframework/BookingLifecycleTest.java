@@ -2,7 +2,7 @@ package com.vgekhtman.automation.seleniumframework;
 
 import com.vgekhtman.automation.common.model.BookingData;
 import com.vgekhtman.automation.common.testdata.BookingDataFactory;
-import com.vgekhtman.automation.seleniumframework.components.AdminBookingRow;
+import com.vgekhtman.automation.seleniumframework.pages.components.AdminBookingRow;
 import com.vgekhtman.automation.seleniumframework.pages.RoomReservationPage;
 import com.vgekhtman.automation.seleniumframework.pages.admin.AdminLoginPage;
 import com.vgekhtman.automation.seleniumframework.support.SeleniumExtension;

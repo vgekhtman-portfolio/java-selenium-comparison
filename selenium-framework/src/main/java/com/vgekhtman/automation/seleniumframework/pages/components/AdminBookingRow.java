@@ -1,4 +1,4 @@
-package com.vgekhtman.automation.seleniumframework.components;
+package com.vgekhtman.automation.seleniumframework.pages.components;
 
 import com.vgekhtman.automation.seleniumframework.core.UiElement;
 import org.openqa.selenium.By;

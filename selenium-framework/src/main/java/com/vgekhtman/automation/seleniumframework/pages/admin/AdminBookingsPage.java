@@ -1,7 +1,7 @@
 package com.vgekhtman.automation.seleniumframework.pages.admin;
 
 import com.vgekhtman.automation.common.model.RoomType;
-import com.vgekhtman.automation.seleniumframework.components.AdminBookingRow;
+import com.vgekhtman.automation.seleniumframework.pages.components.AdminBookingRow;
 import com.vgekhtman.automation.seleniumframework.core.UiElement;
 import org.openqa.selenium.By;
 

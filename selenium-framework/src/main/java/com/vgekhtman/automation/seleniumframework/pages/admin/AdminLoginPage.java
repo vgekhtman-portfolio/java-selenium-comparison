@@ -1,6 +1,6 @@
 package com.vgekhtman.automation.seleniumframework.pages.admin;
 
-import com.vgekhtman.automation.seleniumframework.config.FrameworkConfig;
+import com.vgekhtman.automation.common.config.Config;
 import com.vgekhtman.automation.seleniumframework.core.UiElement;
 import com.vgekhtman.automation.seleniumframework.driver.DriverManager;
 import org.openqa.selenium.By;
@@ -20,14 +20,14 @@ public class AdminLoginPage {
     }
 
     public AdminLoginPage open() {
-        DriverManager.getDriver().get(FrameworkConfig.baseUrl() + "/admin");
+        DriverManager.getDriver().get(Config.baseUrl() + "/admin");
         usernameInput.waitUntilVisible();
         return this;
     }
 
     public AdminBookingsPage loginAsAdmin() {
-        usernameInput.type(FrameworkConfig.adminUsername());
-        passwordInput.type(FrameworkConfig.adminPassword());
+        usernameInput.type(Config.adminUsername());
+        passwordInput.type(Config.adminPassword());
         loginButton.click();
         roomsNavLink.waitUntilVisible();
         return new AdminBookingsPage();

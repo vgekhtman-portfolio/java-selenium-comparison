@@ -1,4 +1,4 @@
-package com.vgekhtman.automation.selenide.components;
+package com.vgekhtman.automation.selenide.pages.components;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
