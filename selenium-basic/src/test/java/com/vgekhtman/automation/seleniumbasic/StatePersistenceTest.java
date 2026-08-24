@@ -1,5 +1,6 @@
 package com.vgekhtman.automation.seleniumbasic;
 
+import com.vgekhtman.automation.common.api.BookingApiClient;
 import com.vgekhtman.automation.common.model.BookingData;
 import com.vgekhtman.automation.common.testdata.BookingDataFactory;
 import com.vgekhtman.automation.seleniumbasic.pages.RoomReservationPage;
@@ -47,5 +48,6 @@ class StatePersistenceTest extends BaseUiTest {
         assertEquals(DateTimeFormatter.ISO_LOCAL_DATE.format(booking.getCheckOut()),
                 adminBookings.checkOutDate(booking.getFirstName()),
                 "Check-out date should be unchanged after revisiting");
+        BookingApiClient.deleteBooking(booking);
     }
 }

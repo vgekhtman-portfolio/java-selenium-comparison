@@ -1,5 +1,6 @@
 package com.vgekhtman.automation.seleniumbasic.pages;
 
+import com.vgekhtman.automation.common.config.Config;
 import com.vgekhtman.automation.common.model.BookingData;
 import com.vgekhtman.automation.common.model.RoomType;
 import com.vgekhtman.automation.seleniumbasic.config.TestConfig;
@@ -35,7 +36,7 @@ public class RoomReservationPage {
 
     public RoomReservationPage open(RoomType roomType, LocalDate checkIn, LocalDate checkOut) {
         String url = "%s/reservation/%d?checkin=%s&checkout=%s".formatted(
-                TestConfig.baseUrl(),
+                Config.baseUrl(),
                 roomType.getRoomId(),
                 DateTimeFormatter.ISO_LOCAL_DATE.format(checkIn),
                 DateTimeFormatter.ISO_LOCAL_DATE.format(checkOut));

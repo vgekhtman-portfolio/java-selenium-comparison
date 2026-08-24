@@ -1,6 +1,7 @@
 package com.vgekhtman.automation.selenide;
 
 import com.vgekhtman.automation.selenide.support.SelenideExtension;
+import com.vgekhtman.automation.common.api.BookingApiClient;
 import com.vgekhtman.automation.common.model.BookingData;
 import com.vgekhtman.automation.common.testdata.BookingDataFactory;
 import com.vgekhtman.automation.selenide.pages.RoomReservationPage;
@@ -33,5 +34,6 @@ class SynchronizationTest {
 
         assertTrue(reservationPage.waitForBookingConfirmed(),
                 "Post-submission confirmation state should be reached without a fixed sleep");
+        BookingApiClient.deleteBooking(booking);
     }
 }

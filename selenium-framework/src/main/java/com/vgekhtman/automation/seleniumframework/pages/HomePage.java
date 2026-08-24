@@ -1,6 +1,6 @@
 package com.vgekhtman.automation.seleniumframework.pages;
 
-import com.vgekhtman.automation.seleniumframework.config.FrameworkConfig;
+import com.vgekhtman.automation.common.config.Config;
 import com.vgekhtman.automation.seleniumframework.core.UiElement;
 import com.vgekhtman.automation.seleniumframework.driver.DriverManager;
 import org.openqa.selenium.By;
@@ -18,7 +18,7 @@ public class HomePage {
     }
 
     public HomePage open() {
-        DriverManager.getDriver().get(FrameworkConfig.baseUrl());
+        DriverManager.getDriver().get(Config.baseUrl());
         roomsHeading.waitUntilVisible();
         return this;
     }

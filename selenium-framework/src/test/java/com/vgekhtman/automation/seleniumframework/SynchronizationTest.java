@@ -1,5 +1,6 @@
 package com.vgekhtman.automation.seleniumframework;
 
+import com.vgekhtman.automation.common.api.BookingApiClient;
 import com.vgekhtman.automation.common.model.BookingData;
 import com.vgekhtman.automation.common.testdata.BookingDataFactory;
 import com.vgekhtman.automation.seleniumframework.pages.RoomReservationPage;
@@ -33,5 +34,6 @@ class SynchronizationTest {
 
         assertTrue(reservationPage.waitForBookingConfirmed(),
                 "Post-submission confirmation state should be reached without a fixed sleep");
+        BookingApiClient.deleteBooking(booking);
     }
 }

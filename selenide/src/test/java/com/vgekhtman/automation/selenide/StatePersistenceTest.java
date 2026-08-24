@@ -1,9 +1,10 @@
 package com.vgekhtman.automation.selenide;
 
 import com.vgekhtman.automation.selenide.support.SelenideExtension;
+import com.vgekhtman.automation.common.api.BookingApiClient;
 import com.vgekhtman.automation.common.model.BookingData;
 import com.vgekhtman.automation.common.testdata.BookingDataFactory;
-import com.vgekhtman.automation.selenide.components.AdminBookingRow;
+import com.vgekhtman.automation.selenide.pages.components.AdminBookingRow;
 import com.vgekhtman.automation.selenide.pages.RoomReservationPage;
 import com.vgekhtman.automation.selenide.pages.admin.AdminBookingsPage;
 import com.vgekhtman.automation.selenide.pages.admin.AdminLoginPage;
@@ -49,5 +50,6 @@ class StatePersistenceTest {
                 "Check-in date should be unchanged after revisiting");
         assertEquals(DateTimeFormatter.ISO_LOCAL_DATE.format(booking.getCheckOut()), revisitRow.checkOutDate(),
                 "Check-out date should be unchanged after revisiting");
+        BookingApiClient.deleteBooking(booking);
     }
 }

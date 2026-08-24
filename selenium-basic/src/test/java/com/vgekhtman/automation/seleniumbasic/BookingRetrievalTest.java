@@ -1,5 +1,6 @@
 package com.vgekhtman.automation.seleniumbasic;
 
+import com.vgekhtman.automation.common.api.BookingApiClient;
 import com.vgekhtman.automation.common.model.BookingData;
 import com.vgekhtman.automation.common.testdata.BookingDataFactory;
 import com.vgekhtman.automation.seleniumbasic.pages.RoomReservationPage;
@@ -38,6 +39,7 @@ class BookingRetrievalTest extends BaseUiTest {
 
         adminBookings.waitForBookingVisible(booking.getFirstName());
         assertEquals(booking.getLastName(), adminBookings.lastName(booking.getFirstName()));
+        BookingApiClient.deleteBooking(booking);
     }
 
     @Test
