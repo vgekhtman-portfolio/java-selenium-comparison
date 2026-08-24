@@ -32,6 +32,8 @@
         <selenide.version>7.9.3</selenide.version>
         <allure.version>2.29.1</allure.version>
         <lombok.version>1.18.46</lombok.version>
+        <slf4j.version>2.0.18</slf4j.version>
+        <logback.version>1.6.3</logback.version>
 
         <!-- Build plugin versions -->
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
@@ -71,6 +73,18 @@
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
                 <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
             </dependency>
 
             <!-- Internal module -->
