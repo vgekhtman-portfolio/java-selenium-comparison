@@ -2,7 +2,9 @@ package com.vgekhtman.automation.seleniumframework.support;
 
 import com.vgekhtman.automation.seleniumframework.config.FrameworkConfig;
 import com.vgekhtman.automation.seleniumframework.driver.DriverManager;
+import io.qameta.allure.Allure;
 import org.junit.jupiter.api.extension.AfterEachCallback;
+import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestExecutionExceptionHandler;
 import org.openqa.selenium.OutputType;
@@ -11,15 +13,21 @@ import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Instant;
 
-/** Quits the driver after each test, saving a failure screenshot first. */
-public class SeleniumExtension implements AfterEachCallback, TestExecutionExceptionHandler {
+/** Labels each test with its Allure epic and quits the driver after each test, saving a failure screenshot first. */
+public class SeleniumExtension implements BeforeEachCallback, AfterEachCallback, TestExecutionExceptionHandler {
 
     private static final Logger log = LoggerFactory.getLogger(SeleniumExtension.class);
+
+    @Override
+    public void beforeEach(ExtensionContext context) {
+        Allure.label("epic", "Custom Selenium Framework");
+    }
 
     @Override
     public void afterEach(ExtensionContext context) {
@@ -42,6 +50,7 @@ public class SeleniumExtension implements AfterEachCallback, TestExecutionExcept
             byte[] png = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
             Files.write(file, png);
             log.warn("Test failed - screenshot saved to {}", file.toAbsolutePath());
+            Allure.addAttachment("Failure screenshot", "image/png", new ByteArrayInputStream(png), ".png");
         } catch (IOException | RuntimeException e) {
             log.warn("Could not capture failure screenshot for {}", testName, e);
         }

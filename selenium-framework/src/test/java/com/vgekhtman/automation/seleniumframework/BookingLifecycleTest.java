@@ -6,6 +6,8 @@ import com.vgekhtman.automation.seleniumframework.pages.components.AdminBookingR
 import com.vgekhtman.automation.seleniumframework.pages.RoomReservationPage;
 import com.vgekhtman.automation.seleniumframework.pages.admin.AdminLoginPage;
 import com.vgekhtman.automation.seleniumframework.support.SeleniumExtension;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 // TC-BOOK-004: Booking Lifecycle
 @ExtendWith(SeleniumExtension.class)
+@Feature("Booking")
 class BookingLifecycleTest {
 
     @Test
@@ -28,29 +31,35 @@ class BookingLifecycleTest {
         // other test or by other users of this shared public demo instance.
         BookingData booking = BookingDataFactory.uniqueValidBooking();
 
-        RoomReservationPage reservationPage = new RoomReservationPage()
-                .open(booking.getRoomType(), booking.getCheckIn(), booking.getCheckOut())
-                .startReservation()
-                .fillGuestDetails(booking);
+        RoomReservationPage reservationPage = Allure.step("Create a booking through the UI", () ->
+                new RoomReservationPage()
+                        .open(booking.getRoomType(), booking.getCheckIn(), booking.getCheckOut())
+                        .startReservation()
+                        .fillGuestDetails(booking));
         reservationPage.confirmReservation();
         assertTrue(reservationPage.waitForBookingConfirmed(), "Booking should be confirmed");
 
-        AdminBookingRow row = new AdminLoginPage()
-                .open()
-                .loginAsAdmin()
-                .openRoomBookings(booking.getRoomType())
-                .booking(booking.getFirstName())
-                .waitUntilVisible();
+        AdminBookingRow row = Allure.step("Retrieve the booking via the Admin panel", () ->
+                new AdminLoginPage()
+                        .open()
+                        .loginAsAdmin()
+                        .openRoomBookings(booking.getRoomType())
+                        .booking(booking.getFirstName())
+                        .waitUntilVisible());
 
-        assertEquals(booking.getLastName(), row.lastName());
-        assertEquals(DateTimeFormatter.ISO_LOCAL_DATE.format(booking.getCheckIn()), row.checkInDate());
-        assertEquals(DateTimeFormatter.ISO_LOCAL_DATE.format(booking.getCheckOut()), row.checkOutDate());
+        Allure.step("Verify initial booking details", () -> {
+            assertEquals(booking.getLastName(), row.lastName());
+            assertEquals(DateTimeFormatter.ISO_LOCAL_DATE.format(booking.getCheckIn()), row.checkInDate());
+            assertEquals(DateTimeFormatter.ISO_LOCAL_DATE.format(booking.getCheckOut()), row.checkOutDate());
+        });
 
         String updatedLastName = booking.getLastName() + "Updated";
-        row.editLastName(updatedLastName);
+        Allure.step("Update the booking's last name", () -> {
+            row.editLastName(updatedLastName);
+        });
         assertEquals(updatedLastName, row.lastName(), "Last name should reflect the update");
 
-        row.delete();
+        Allure.step("Delete the booking", row::delete);
         assertFalse(row.exists(), "Booking should no longer be listed after deletion");
     }
 }

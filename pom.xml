@@ -70,6 +70,12 @@
             </dependency>
 
             <dependency>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-selenide</artifactId>
+                <version>${allure.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
@@ -136,6 +142,11 @@
                     <configuration>
                         <!-- Reruns failed tests once - a safety net for the real external SUT. -->
                         <rerunFailingTestsCount>1</rerunFailingTestsCount>
+                        <!-- Shared results directory at the reactor root, so a combined
+                             Allure report can be generated across all modules. -->
+                        <systemPropertyVariables>
+                            <allure.results.directory>${maven.multiModuleProjectDirectory}/target/allure-results</allure.results.directory>
+                        </systemPropertyVariables>
                     </configuration>
                 </plugin>
             </plugins>

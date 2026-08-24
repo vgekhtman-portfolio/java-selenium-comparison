@@ -4,10 +4,14 @@ import com.vgekhtman.automation.seleniumbasic.config.TestConfig;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 
 public final class DriverFactory {
+
+    private static final Logger log = LoggerFactory.getLogger(DriverFactory.class);
 
     private DriverFactory() {
     }
@@ -27,6 +31,7 @@ public final class DriverFactory {
         // Explicit waits only - mixing an implicit wait with WebDriverWait
         // makes wait times unpredictable and hard to debug.
         driver.manage().timeouts().implicitlyWait(Duration.ZERO);
+        log.debug("Created Chrome driver session {}", driver);
         return driver;
     }
 }

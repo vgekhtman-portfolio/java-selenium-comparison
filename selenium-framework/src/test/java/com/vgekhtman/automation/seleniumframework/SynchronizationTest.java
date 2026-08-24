@@ -5,6 +5,8 @@ import com.vgekhtman.automation.common.model.BookingData;
 import com.vgekhtman.automation.common.testdata.BookingDataFactory;
 import com.vgekhtman.automation.seleniumframework.pages.RoomReservationPage;
 import com.vgekhtman.automation.seleniumframework.support.SeleniumExtension;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * there rather than repeated per Page Object - none of it is a fixed sleep.
  */
 @ExtendWith(SeleniumExtension.class)
+@Feature("Synchronization")
 class SynchronizationTest {
 
     @Test
@@ -26,14 +29,18 @@ class SynchronizationTest {
     void bookingSubmissionSynchronizesOnRealState() {
         BookingData booking = BookingDataFactory.minimalValidBooking();
 
-        RoomReservationPage reservationPage = new RoomReservationPage()
-                .open(booking.getRoomType(), booking.getCheckIn(), booking.getCheckOut())
-                .startReservation()
-                .fillGuestDetails(booking);
-        reservationPage.confirmReservation();
+        RoomReservationPage reservationPage = Allure.step("Open, fill and submit the booking", () -> {
+            RoomReservationPage page = new RoomReservationPage()
+                    .open(booking.getRoomType(), booking.getCheckIn(), booking.getCheckOut())
+                    .startReservation()
+                    .fillGuestDetails(booking);
+            page.confirmReservation();
+            return page;
+        });
 
-        assertTrue(reservationPage.waitForBookingConfirmed(),
-                "Post-submission confirmation state should be reached without a fixed sleep");
+        Allure.step("Wait for post-submission confirmation without a fixed sleep", () ->
+                assertTrue(reservationPage.waitForBookingConfirmed(),
+                        "Post-submission confirmation state should be reached without a fixed sleep"));
         BookingApiClient.deleteBooking(booking);
     }
 }

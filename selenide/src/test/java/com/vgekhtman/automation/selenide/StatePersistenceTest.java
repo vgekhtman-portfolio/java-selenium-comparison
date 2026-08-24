@@ -8,6 +8,7 @@ import com.vgekhtman.automation.selenide.pages.components.AdminBookingRow;
 import com.vgekhtman.automation.selenide.pages.RoomReservationPage;
 import com.vgekhtman.automation.selenide.pages.admin.AdminBookingsPage;
 import com.vgekhtman.automation.selenide.pages.admin.AdminLoginPage;
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 // TC-BOOK-006: State Persistence
 @ExtendWith(SelenideExtension.class)
+@Feature("Booking")
 class StatePersistenceTest {
 
     @Test

@@ -6,6 +6,7 @@ import com.vgekhtman.automation.common.testdata.BookingDataFactory;
 import com.vgekhtman.automation.selenide.pages.components.AdminBookingRow;
 import com.vgekhtman.automation.selenide.pages.RoomReservationPage;
 import com.vgekhtman.automation.selenide.pages.admin.AdminLoginPage;
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 // TC-BOOK-004: Booking Lifecycle
 @ExtendWith(SelenideExtension.class)
+@Feature("Booking")
 class BookingLifecycleTest {
 
     @Test
