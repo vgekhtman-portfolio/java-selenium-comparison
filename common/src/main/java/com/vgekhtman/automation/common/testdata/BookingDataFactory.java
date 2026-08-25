@@ -25,7 +25,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public final class BookingDataFactory {
 
     private static final int MIN_DAYS_OUT = 1;
-    private static final int MAX_DAYS_OUT = 300;
+    private static final int MAX_DAYS_OUT = 3650;
 
     private BookingDataFactory() {
     }
