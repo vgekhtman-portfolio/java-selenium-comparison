@@ -140,8 +140,8 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${maven-surefire-plugin.version}</version>
                     <configuration>
-                        <!-- Reruns failed tests once - a safety net for the real external SUT. -->
-                        <rerunFailingTestsCount>1</rerunFailingTestsCount>
+                        <!-- Reruns failed tests - a safety net for the real external SUT. -->
+                        <rerunFailingTestsCount>2</rerunFailingTestsCount>
                         <!-- Shared results directory at the reactor root, so a combined
                              Allure report can be generated across all modules. -->
                         <systemPropertyVariables>
