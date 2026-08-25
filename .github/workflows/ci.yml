@@ -1,0 +1,96 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test (${{ matrix.module }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        module: [selenium-basic, selenium-framework, selenide]
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Run ${{ matrix.module }} tests
+        run: mvn -B -pl ${{ matrix.module }} -am test
+
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: allure-results-${{ matrix.module }}
+          path: target/allure-results
+          if-no-files-found: warn
+
+  allure-report:
+    name: Combined Allure report
+    needs: test
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Download all Allure results
+        uses: actions/download-artifact@v8
+        with:
+          pattern: allure-results-*
+          path: target/allure-results
+          merge-multiple: true
+
+      - name: Fetch previous report history (for trend graphs)
+        run: |
+          mkdir -p target/allure-results/history
+          for f in history.json history-trend.json categories-trend.json duration-trend.json retry-trend.json; do
+            curl -sf "https://vgekhtman-portfolio.github.io/java-selenium-comparison/history/$f" \
+              -o "target/allure-results/history/$f" || true
+          done
+
+      - name: Generate combined report
+        run: mvn -q -N io.qameta.allure:allure-maven:report -Dreport.version=2.34.1
+
+      - name: Upload report for Pages
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: target/site/allure-maven-plugin
+
+  deploy-pages:
+    name: Deploy Allure report to Pages
+    needs: allure-report
+    # Only push events land on a real branch ref; pull_request runs use a
+    # synthetic merge ref that the github-pages environment's branch
+    # protection rules reject.
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
