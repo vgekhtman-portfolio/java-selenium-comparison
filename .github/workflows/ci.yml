@@ -60,6 +60,14 @@ jobs:
           path: target/allure-results
           merge-multiple: true
 
+      - name: Fetch previous report history (for trend graphs)
+        run: |
+          mkdir -p target/allure-results/history
+          for f in history.json history-trend.json categories-trend.json duration-trend.json retry-trend.json; do
+            curl -sf "https://vgekhtman-portfolio.github.io/java-selenium-comparison/history/$f" \
+              -o "target/allure-results/history/$f" || true
+          done
+
       - name: Generate combined report
         run: mvn -q -N io.qameta.allure:allure-maven:report -Dreport.version=2.34.1
 
