@@ -217,9 +217,32 @@ The CI setup supports the individual implementations and the complete suite.
 
 # Docker
 
-Docker provides a reproducible test execution environment.
+Docker provides a reproducible test execution environment for local use only
+(CI runs natively - see below). The public SUT is not containerized by this
+project.
 
-The public Restful Booker SUT is not containerized by this project.
+Run the full suite:
+
+```bash
+docker-compose up
+```
+
+Run a single module:
+
+```bash
+MODULE=selenium-basic docker-compose up
+```
+
+Run a subset of modules:
+
+```bash
+MODULE=selenium-basic,selenide docker-compose up
+```
+
+`MODULE` accepts any Maven `-pl` value - a single module name or a
+comma-separated list; omit it (or use `all`) for the full suite. Allure
+results land in `target/allure-results` on the host either way, same as a
+local run - see [Reporting](#reporting) above to generate the combined report.
 
 # Project Structure
 ```

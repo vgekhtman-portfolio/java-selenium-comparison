@@ -26,6 +26,8 @@ public final class DriverFactory {
         // requested - go generously tall so scrollIntoView(center) always
         // has room to place a target element fully inside the viewport.
         options.addArguments("--window-size=1440,1600");
+        // Chrome refuses to sandbox as root, which is how it runs in Docker.
+        options.addArguments("--no-sandbox");
 
         WebDriver driver = new ChromeDriver(options);
         // Explicit waits only - mixing an implicit wait with WebDriverWait

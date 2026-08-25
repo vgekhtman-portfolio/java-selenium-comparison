@@ -1,0 +1,12 @@
+services:
+  tests:
+    build: .
+    environment:
+      # "all" (default), a single module ("selenium-basic"), or a
+      # comma-separated subset ("selenium-basic,selenide").
+      MODULE: ${MODULE:-all}
+    volumes:
+      - .:/workspace
+      - ~/.m2:/root/.m2
+    # Docker's default /dev/shm is too small for Chrome under load.
+    shm_size: "2gb"
