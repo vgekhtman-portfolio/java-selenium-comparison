@@ -1,5 +1,7 @@
 # Java Selenium Comparison
 
+[![CI](https://github.com/vgekhtman-portfolio/java-selenium-comparison/actions/workflows/ci.yml/badge.svg)](https://github.com/vgekhtman-portfolio/java-selenium-comparison/actions/workflows/ci.yml)
+
 A portfolio project demonstrating three approaches to Java UI test automation against the public Restful Booker application.
 
 ## Purpose
@@ -211,9 +213,10 @@ stop it with `Ctrl+C` in that terminal.
 
 # CI
 
-GitHub Actions is used for automated test execution.
-
-The CI setup supports the individual implementations and the complete suite.
+GitHub Actions runs each of the three modules as its own job, so any one
+implementation's result is visible independently; running all three together
+is the normal full-suite run. A combined Allure report across all three is
+generated afterward and published to GitHub Pages.
 
 # Docker
 
